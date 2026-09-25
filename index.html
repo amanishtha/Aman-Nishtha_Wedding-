@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5b0f19">
+<title>Nistha & Aman — Wedding Invitation</title>
+
+<!-- Clean, formal fonts — no cursive -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --maroon:#5b0f19;
+  --deep:#2a070d;
+  --wine:#761b28;
+  --gold:#d6a84f;
+  --gold2:#f2d48a;
+  --cream:#fff8e9;
+  --paper:#f8ecd4;
+  --ink:#32151a;
+  --muted:#765b54;
+  --green:#355b47;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--deep);
+  color:var(--ink);
+  font-family:Montserrat,Arial,sans-serif;
+  overflow-x:hidden;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+
+#gate{
+  position:fixed; inset:0; z-index:1000;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(214,168,79,.18),transparent 28%),
+    linear-gradient(135deg,#22060b,#5b0f19 55%,#26070c);
+  display:grid; place-items:center;
+  overflow:hidden;
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none}
+.gate-glow{
+  position:absolute; width:70vmax;height:70vmax;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,212,138,.12),transparent 65%);
+  animation:pulse 3.8s ease-in-out infinite;
+}
+.gate-frame{
+  position:relative;width:min(92vw,430px);height:min(84vh,700px);
+  border:2px solid var(--gold);
+  box-shadow:0 0 0 8px rgba(214,168,79,.08),0 25px 80px rgba(0,0,0,.55);
+  overflow:hidden;
+  background:#3d0a12;
+}
+.gate-top{
+  position:absolute;left:7%;right:7%;top:5%;height:18%;
+  border:1px solid var(--gold);border-bottom:0;
+  border-radius:140px 140px 0 0;
+  opacity:.85;
+}
+.gate-side{
+  position:absolute;top:0;bottom:0;width:12px;
+  background:linear-gradient(#f0cc78,#a8792e,#f0cc78);
+  box-shadow:0 0 22px rgba(214,168,79,.18);
+}
+.gate-side.l{left:7%}.gate-side.r{right:7%}
+.gate-ornament{
+  position:absolute;left:50%;top:13%;transform:translateX(-50%);
+  color:var(--gold2);font-family:"Noto Serif Devanagari",serif;
+  font-size:38px;letter-spacing:3px;
+}
+.gate-sub{
+  position:absolute;left:50%;top:23%;transform:translateX(-50%);
+  width:80%;text-align:center;color:#f7e4ae;
+  font-size:10px;letter-spacing:4px;font-weight:700;
+}
+.gate-door{
+  position:absolute;top:31%;bottom:0;width:50%;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.03),transparent 30%,rgba(0,0,0,.18)),
+    repeating-linear-gradient(90deg,#6b111e 0 26px,#741624 26px 29px);
+  border-top:1px solid rgba(242,212,138,.5);
+  transition:transform 1.25s cubic-bezier(.7,0,.2,1);
+  z-index:3;
+}
+.gate-door:before,.gate-door:after{
+  content:"";position:absolute;top:7%;bottom:7%;width:2px;background:rgba(242,212,138,.65);
+}
+.gate-door:before{left:12%}.gate-door:after{right:12%}
+.gate-door.left{left:0;border-right:1px solid var(--gold)}
+.gate-door.right{right:0;border-left:1px solid var(--gold)}
+#gate.open .gate-door.left{transform:translateX(-103%)}
+#gate.open .gate-door.right{transform:translateX(103%)}
+.gate-center{
+  position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  text-align:center;color:#fff8e9;z-index:2;width:75%;
+}
+.gate-center .small{font-size:10px;letter-spacing:3px;font-weight:700;color:var(--gold2)}
+.gate-center h1{
+  margin:12px 0 6px;font-family:Cinzel,serif;font-size:34px;letter-spacing:2px;
+}
+.gate-center p{margin:0;color:#e8cfab;font-size:12px}
+.open-btn{
+  position:absolute;bottom:7%;left:50%;transform:translateX(-50%);
+  z-index:8;border:1px solid var(--gold2);background:rgba(35,5,10,.72);
+  color:#fff4d1;padding:13px 25px;letter-spacing:2px;font-size:11px;font-weight:700;
+  text-transform:uppercase;
+}
+.open-btn:active{transform:translateX(-50%) scale(.97)}
+
+main{background:var(--cream)}
+.hero{
+  min-height:100svh;display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;overflow:hidden;
+  padding:85px 22px 55px;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(214,168,79,.22),transparent 30%),
+    linear-gradient(180deg,#fff7e6 0%,#f5e4c8 100%);
+}
+.hero:before{
+  content:"";position:absolute;inset:18px;border:1px solid rgba(91,15,25,.25);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;max-width:760px}
+.ganesh{
+  width:92px;height:92px;margin:0 auto 18px;display:grid;place-items:center;
+  border:1px solid var(--gold);border-radius:50%;
+  background:rgba(255,255,255,.45);color:var(--maroon);
+  font-family:"Noto Serif Devanagari",serif;font-size:45px;
+  box-shadow:0 10px 35px rgba(91,15,25,.08);
+}
+.kicker{font-size:11px;letter-spacing:4px;font-weight:700;color:var(--maroon)}
+.hero h1{
+  margin:18px 0 8px;font-family:Cinzel,serif;font-size:clamp(40px,11vw,78px);
+  letter-spacing:2px;color:var(--maroon);line-height:1.05;
+}
+.amp{color:var(--gold);font-size:.72em}
+.hero .date{font-size:14px;letter-spacing:3px;font-weight:600;color:#5d4138}
+.scroll-note{margin-top:38px;font-size:10px;letter-spacing:3px;color:var(--muted)}
+.down{display:block;margin:10px auto 0;width:1px;height:35px;background:var(--gold);animation:down 1.5s infinite}
+
+.section{
+  position:relative;padding:82px 20px;
+  background:var(--cream);
+}
+.section.alt{background:#f2e2c8}
+.container{width:min(980px,100%);margin:auto}
+.section-head{text-align:center;margin-bottom:36px}
+.section-head .eyebrow{font-size:10px;letter-spacing:3px;color:var(--maroon);font-weight:700}
+.section-head h2{
+  font-family:Cinzel,serif;font-size:clamp(26px,7vw,42px);
+  color:var(--maroon);margin:9px 0 10px;
+}
+.section-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.8}
+
+.invite-copy{
+  max-width:720px;margin:auto;text-align:center;padding:0 8px;
+}
+.invite-copy .shloka{
+  font-family:"Noto Serif Devanagari",serif;font-size:18px;color:var(--maroon);
+  margin-bottom:24px;
+}
+.invite-copy p{font-size:14px;line-height:2;color:#58423d}
+
+.names{
+  margin:35px auto 0;padding:28px 20px;border-top:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);max-width:650px;text-align:center;
+}
+.names .name{
+  font-family:Cinzel,serif;font-size:clamp(30px,8vw,55px);color:var(--maroon);
+  letter-spacing:2px;
+}
+.names .heart{display:block;color:var(--gold);font-size:25px;margin:8px 0}
+
+.events{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.event{
+  background:rgba(255,250,238,.88);border:1px solid rgba(91,15,25,.16);
+  box-shadow:0 15px 45px rgba(74,28,20,.08);padding:0 0 22px;
+  text-align:center;overflow:hidden;transition:transform .4s ease;
+}
+.event:hover{transform:translateY(-5px)}
+.illustration{
+  height:210px;background:linear-gradient(135deg,#f5d99e,#fff0cf);
+  display:grid;place-items:center;border-bottom:1px solid rgba(91,15,25,.12);
+}
+.event h3{font-family:Cinzel,serif;color:var(--maroon);font-size:20px;margin:19px 12px 7px}
+.event .event-date{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold)}
+.event p{font-size:12px;color:var(--muted);line-height:1.7;margin:10px 20px 0}
+.svg-art{width:86%;height:86%;max-width:260px}
+
+.count-section{
+  color:#fff7e5;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(242,212,138,.18),transparent 27%),
+    linear-gradient(145deg,#2b080e,#6a111d 52%,#2c080e);
+  overflow:hidden;
+}
+.mandala{
+  position:absolute;left:50%;top:50%;width:min(100vw,680px);height:min(100vw,680px);
+  transform:translate(-50%,-50%);opacity:.12;
+  border:1px solid var(--gold2);border-radius:50%;
+}
+.mandala:before,.mandala:after{
+  content:"";position:absolute;inset:9%;border:1px solid var(--gold2);border-radius:50%;
+  transform:rotate(45deg);
+}
+.mandala:after{inset:20%;transform:rotate(22.5deg)}
+.count-content{position:relative;z-index:2;text-align:center}
+.countdown{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:9px;
+  max-width:650px;margin:30px auto 0;
+}
+.time-box{border:1px solid rgba(242,212,138,.6);padding:18px 5px;background:rgba(0,0,0,.12)}
+.time-box strong{display:block;font-family:Cinzel,serif;font-size:clamp(25px,7vw,42px);color:#ffe6a3}
+.time-box span{font-size:9px;letter-spacing:2px;color:#ead3a5}
+
+.venue-card{
+  background:#fffaf0;border:1px solid rgba(91,15,25,.16);
+  box-shadow:0 18px 55px rgba(60,20,15,.08);overflow:hidden;
+}
+.venue-photo{
+  width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  background:
+    linear-gradient(135deg,rgba(91,15,25,.9),rgba(118,27,40,.72)),
+    repeating-linear-gradient(45deg,transparent 0 20px,rgba(242,212,138,.14) 20px 22px);
+}
+.venue-body{padding:25px;text-align:center}
+.venue-body h3{font-family:Cinzel,serif;color:var(--maroon);margin:0 0 7px;font-size:25px}
+.venue-body p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.map-btn,.share-btn{
+  display:inline-flex;align-items:center;justify-content:center;margin-top:18px;
+  padding:12px 18px;border:1px solid var(--maroon);background:var(--maroon);
+  color:#fff7e9;text-decoration:none;font-size:10px;letter-spacing:2px;font-weight:700;
+}
+
+.family-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:700px;margin:auto;
+}
+.family{
+  background:#fffaf0;border:1px solid rgba(91,15,25,.12);padding:25px;text-align:center;
+}
+.family .label{font-size:9px;letter-spacing:2px;color:var(--gold);font-weight:700}
+.family h3{font-family:Cinzel,serif;color:var(--maroon);font-size:20px;margin:9px 0}
+.family p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+
+.final{
+  text-align:center;background:#f1dfc0;padding-bottom:100px;
+}
+.final h2{font-family:Cinzel,serif;color:var(--maroon);font-size:clamp(28px,8vw,44px)}
+.final p{color:var(--muted);line-height:1.9;font-size:13px}
+.signature{font-family:Cinzel,serif;color:var(--maroon);font-size:27px;margin-top:22px}
+.controls{
+  position:fixed;right:14px;bottom:16px;z-index:100;
+  display:flex;gap:8px;
+}
+.control-btn{
+  border:1px solid rgba(255,244,209,.45);background:rgba(45,7,12,.88);
+  color:#fff2cf;padding:10px 13px;font-size:9px;letter-spacing:1.5px;font-weight:700;
+}
+#guestLine{display:none;margin-top:12px;color:var(--maroon);font-size:12px;font-weight:600}
+.personalize{
+  margin:22px auto 0;display:flex;justify-content:center;gap:8px;max-width:420px;
+}
+.personalize input{
+  min-width:0;flex:1;padding:12px 13px;border:1px solid rgba(91,15,25,.25);
+  background:#fffaf0;color:var(--ink);outline:none;
+}
+.personalize button{padding:12px 15px;border:0;background:var(--maroon);color:white;font-size:10px;font-weight:700}
+.upload-note{font-size:10px;color:var(--muted);margin-top:10px}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:none}
+
+@keyframes pulse{50%{transform:scale(1.08);opacity:.7}}
+@keyframes down{50%{height:48px;opacity:.4}}
+@media(max-width:720px){
+  .events{grid-template-columns:1fr}
+  .event{max-width:470px;margin:auto}
+  .illustration{height:190px}
+}
+@media(max-width:520px){
+  .family-grid{grid-template-columns:1fr}
+  .section{padding:68px 16px}
+  .gate-center h1{font-size:28px}
+  .countdown{gap:6px}
+  .time-box{padding:14px 3px}
+}
+
+.venue-placeholder{
+  display:grid;
+  place-items:center;
+  color:#f2d48a;
+  font-family:Cinzel,serif;
+  font-size:clamp(22px,6vw,36px);
+  letter-spacing:2px;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(242,212,138,.18),transparent 30%),
+    linear-gradient(145deg,#3b0a11,#6d1420);
+}
+
+</style>
+
+<style>
+/* ===== V3 DESIGN OVERRIDES ===== */
+#gate{
+  background:
+    radial-gradient(circle at 50% 18%,rgba(242,212,138,.18),transparent 30%),
+    linear-gradient(145deg,#21050a,#5b0f19 52%,#25060b);
+}
+.gate-frame{
+  height:min(94svh,760px);
+  width:min(92vw,430px);
+  background:linear-gradient(#4b0b14,#26060b);
+}
+.gate-inner-border{
+  position:absolute;inset:14px;border:1px solid rgba(242,212,138,.38);
+  pointer-events:none;z-index:10;
+}
+.gate-ganesha{
+  position:absolute;top:4%;left:50%;transform:translateX(-50%);
+  width:105px;height:132px;border-radius:55px 55px 40px 40px;
+  overflow:hidden;border:2px solid var(--gold2);
+  box-shadow:0 12px 35px rgba(0,0,0,.28);z-index:12;background:#3b0b12;
+}
+.gate-ganesha img{width:100%;height:100%;object-fit:cover;object-position:center 47%}
+.gate-blessing{
+  position:absolute;top:22.5%;left:0;right:0;text-align:center;
+  color:#f5d88e;font-family:"Noto Serif Devanagari",serif;
+  font-size:17px;z-index:12;letter-spacing:.5px;
+}
+.gate-title{
+  position:absolute;top:28.5%;left:8%;right:8%;text-align:center;z-index:12;color:#fff7e4;
+}
+.gate-title .small{font-size:9px;letter-spacing:2.8px;font-weight:700;color:#f1d99e}
+.gate-title h1{
+  margin:9px 0 7px;font-family:Cinzel,serif;font-size:clamp(25px,7.2vw,37px);
+  line-height:1.18;letter-spacing:1.3px;
+}
+.gate-title p{margin:0 auto;color:#e9cfa5;font-size:10.5px;line-height:1.55;max-width:290px}
+.gate-arch{
+  position:absolute;left:9%;right:9%;top:40.5%;height:13%;
+  border:2px solid rgba(242,212,138,.68);border-bottom:0;
+  border-radius:150px 150px 0 0;z-index:5;
+}
+.gate-door{top:49%;bottom:0}
+.open-btn{
+  bottom:4%;padding:12px 21px;font-size:9px;
+  white-space:nowrap;
+}
+.ganesh{overflow:hidden}
+.ganesh img{width:100%;height:100%;object-fit:cover;object-position:center 47%;display:block}
+.hero{padding-top:65px}
+.illustration{
+  position:relative;height:220px;min-height:220px;
+  background:#fff0d0;display:flex;align-items:center;justify-content:center;
+}
+.illustration svg{width:100%;height:100%;display:block}
+@media(max-width:520px){
+  .gate-frame{width:94vw;height:94svh}
+  .gate-ganesha{width:96px;height:120px}
+  .gate-blessing{top:21.5%;font-size:16px}
+  .gate-title{top:27.5%}
+  .gate-title h1{font-size:25px}
+  .gate-title p{font-size:10px}
+  .gate-arch{top:40%;height:12%}
+  .gate-door{top:48%}
+  .open-btn{bottom:3.5%}
+}
+</style>
+
+
+<style>
+/* ===== FINAL MOBILE-FIRST POLISH ===== */
+body{overflow-x:hidden}
+.gate-frame{
+  width:min(92vw,430px);
+  height:min(94svh,760px);
+  position:relative;
+}
+.gate-inner-border{inset:14px}
+.gate-cover-ganesha{
+  position:absolute;
+  z-index:12;
+  left:50%;
+  top:6%;
+  transform:translateX(-50%);
+  width:126px;
+  height:126px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #f2d48a;
+  background:#fff;
+  box-shadow:0 10px 32px rgba(0,0,0,.30);
+}
+.gate-cover-ganesha img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
+.gate-cover-text{
+  position:absolute;
+  z-index:12;
+  top:27%;
+  left:7%;
+  right:7%;
+  text-align:center;
+  color:#fff6df;
+}
+.gate-invite{
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:#f3d996;
+}
+.gate-shloka{
+  margin-top:10px;
+  font-family:"Noto Serif Devanagari",serif;
+  font-size:17px;
+  line-height:1.5;
+  color:#f6d991;
+}
+.gate-rule{
+  width:72px;height:1px;
+  background:#d6a84f;
+  margin:14px auto;
+}
+.gate-wedding{
+  font-size:9px;
+  letter-spacing:2.5px;
+  color:#e9cda2;
+  font-weight:600;
+}
+.gate-cover-text h1{
+  margin:11px 0 9px;
+  font-family:Cinzel,serif;
+  font-size:clamp(27px,8vw,39px);
+  line-height:1.15;
+  letter-spacing:1.6px;
+  white-space:nowrap;
+  color:#fff8e7;
+}
+.gate-cover-text h1 span{color:#d6a84f}
+.gate-date{
+  font-size:10px;
+  letter-spacing:2.4px;
+  font-weight:700;
+  color:#f0d8a6;
+}
+.gate-arch{
+  left:10%;right:10%;top:45%;height:12%;
+}
+.gate-door{top:51%;bottom:0}
+.open-btn{
+  bottom:4.5%;
+  min-width:150px;
+  padding:13px 19px;
+  font-size:9px;
+  letter-spacing:2px;
+}
+.hero-place{
+  margin-top:10px;
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:600;
+  color:#6b4c43;
+}
+.hero .ganesh{
+  width:104px;height:104px;
+}
+.hero .ganesh img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.illustration{
+  height:220px;
+  min-height:220px;
+  overflow:hidden;
+}
+.illustration svg{
+  display:block;width:100%;height:100%;
+}
+.section-head h2{line-height:1.18}
+.section-head p{max-width:620px;margin-left:auto;margin-right:auto}
+.names .name{line-height:1.08}
+.family h3{line-height:1.3}
+.venue-body h3{line-height:1.2}
+.final h2{line-height:1.18}
+@media(max-width:520px){
+  .gate-frame{width:94vw;height:94svh}
+  .gate-cover-ganesha{width:108px;height:108px;top:5.5%}
+  .gate-cover-text{top:24.5%}
+  .gate-invite{font-size:8px;letter-spacing:2.5px}
+  .gate-shloka{font-size:15px;margin-top:8px}
+  .gate-rule{margin:11px auto}
+  .gate-wedding{font-size:8px;letter-spacing:2px}
+  .gate-cover-text h1{font-size:25px;margin:9px 0 8px}
+  .gate-date{font-size:9px;letter-spacing:2px}
+  .gate-arch{top:42%;height:11%}
+  .gate-door{top:49%}
+  .open-btn{bottom:3.5%;padding:12px 18px}
+  .hero{padding-top:62px}
+  .hero h1{font-size:41px;line-height:1.08}
+  .hero-place{font-size:9px;letter-spacing:1.5px}
+}
+</style>
+
+
+<style>
+/* ===== USER-SUPPLIED WEDDING ARTWORK ===== */
+.gate-cover-ganesha{
+  background:#fff;
+  padding:0;
+}
+.gate-cover-ganesha img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.photo-event{
+  height:clamp(230px,68vw,390px);
+  min-height:230px;
+  padding:0;
+  overflow:hidden;
+  background:#f7efe5;
+  border:1px solid rgba(91,15,25,.14);
+}
+.photo-event img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.event:nth-child(1) .photo-event img{object-position:center 50%}
+.event:nth-child(2) .photo-event img{object-position:center 50%}
+.event:nth-child(3) .photo-event img{object-position:center 50%}
+.hero .ganesh{
+  background:#fff;
+}
+.hero .ganesh img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+@media(max-width:520px){
+  .gate-cover-ganesha{
+    width:112px;
+    height:112px;
+  }
+  .photo-event{
+    height:290px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- FIRST SCREEN: CLEAN TRADITIONAL COVER -->
+<div id="gate">
+  <div class="gate-glow"></div>
+  <div class="gate-frame">
+    <div class="gate-inner-border"></div>
+
+    <div class="gate-cover-ganesha">
+      <img src="ganesha-cover.jpg" alt="Lord Ganesha">
+    </div>
+
+    <div class="gate-cover-text">
+      <div class="gate-invite">YOU ARE INVITED</div>
+      <div class="gate-shloka">॥ श्री गणेशाय नमः ॥</div>
+      <div class="gate-rule"></div>
+      <div class="gate-wedding">THE WEDDING OF</div>
+      <h1>NISTHA <span>&</span> AMAN</h1>
+      <div class="gate-date">10 DECEMBER 2026</div>
+    </div>
+
+    <div class="gate-arch"></div>
+    <div class="gate-door left"></div>
+    <div class="gate-door right"></div>
+
+    <button class="open-btn" id="openBtn">OPEN INVITATION</button>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero-inner reveal">
+      <div class="ganesh">
+        <img src="ganesha-cover.jpg" alt="Lord Ganesha">
+      </div>
+      <div class="kicker">WITH THE BLESSINGS OF OUR FAMILIES</div>
+      <h1>NISTHA <span class="amp">&</span> AMAN</h1>
+      <div class="date">10 DECEMBER 2026</div>
+      <div class="hero-place">PARIJAT RESORT · HAIDERGARH</div>
+      <div class="scroll-note">SCROLL TO BEGIN</div>
+      <span class="down"></span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container invite-copy reveal">
+      <div class="section-head">
+        <div class="eyebrow">THE INVITATION</div>
+        <h2>Two Families · One Celebration</h2>
+      </div>
+      <div class="shloka">शुभ विवाह · मंगल मिलन · नव जीवन</div>
+      <p>
+        With the blessings of our elders and the love of our families,
+        we invite you to join us as we celebrate the wedding of
+        <strong>Nistha & Aman</strong>.
+      </p>
+
+      <div class="names">
+        <div class="name">NISTHA</div>
+        <span class="heart">✦</span>
+        <div class="name">AMAN</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">THE CELEBRATIONS</div>
+        <h2>Wedding Festivities</h2>
+        <p>Three beautiful moments before the sacred wedding ceremony.</p>
+      </div>
+
+      <div class="events">
+
+<article class="event reveal">
+  <div class="illustration photo-event">
+    <img src="haldi.jpg" alt="Haldi celebration illustration">
+  </div>
+  <h3>HALDI</h3>
+  <div class="event-date">09 DECEMBER</div>
+  <p>A joyful celebration filled with colour, family and blessings.</p>
+</article>
+
+<article class="event reveal">
+  <div class="illustration photo-event">
+    <img src="mehndi.jpg" alt="Mehendi celebration illustration">
+  </div>
+  <h3>MEHENDI</h3>
+  <div class="event-date">09 DECEMBER</div>
+  <p>Henna, music, smiles and an evening of family celebration.</p>
+</article>
+
+<article class="event reveal">
+  <div class="illustration photo-event">
+    <img src="sangeet.jpg" alt="Sangeet celebration illustration">
+  </div>
+  <h3>SANGEET</h3>
+  <div class="event-date">09 DECEMBER</div>
+  <p>An evening of music, dance and celebration with loved ones.</p>
+</article>
+
+</div>
+    </div>
+  </section>
+
+  <section class="section count-section">
+    <div class="mandala"></div>
+    <div class="container count-content reveal">
+      <div class="section-head">
+        <div class="eyebrow" style="color:#f2d48a">THE SACRED DAY</div>
+        <h2 style="color:#fff3d4">Countdown to the Wedding</h2>
+        <p style="color:#ead3bd">10 December 2026 · Parijat Resort · Haidergarh</p>
+      </div>
+
+      <div class="countdown">
+        <div class="time-box"><strong id="days">00</strong><span>DAYS</span></div>
+        <div class="time-box"><strong id="hours">00</strong><span>HOURS</span></div>
+        <div class="time-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+        <div class="time-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">THE VENUE</div>
+        <h2>Parijat Resort</h2>
+        <p>Haidergarh</p>
+      </div>
+
+      <div class="venue-card reveal">
+        <!-- Put your actual venue photo beside index.html and name it venue.jpg -->
+        <div class="venue-photo venue-placeholder" aria-label="Venue photograph placeholder">
+  <div>PARIJAT RESORT</div>
+</div>
+        <div class="venue-body">
+          <h3>PARIJAT RESORT</h3>
+          <p>HAIDERGARH · UTTAR PRADESH</p>
+          <a class="map-btn" target="_blank"
+             href="https://www.google.com/maps/search/?api=1&query=Parijat+Resort+Haidergarh">
+             OPEN IN GOOGLE MAPS
+          </a>
+          <div class="upload-note">10 DECEMBER 2026 · HAIDERGARH</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">WITH LOVE FROM OUR FAMILIES</div>
+        <h2>Our Families</h2>
+      </div>
+
+      <div class="family-grid">
+        <div class="family reveal">
+          <div class="label">BRIDE'S PARENTS</div>
+          <h3>KAMAL PANDEY &<br>LAXMI PANDEY</h3>
+          <p>With warm hearts and joyful blessings, they invite you to celebrate this auspicious union.</p>
+        </div>
+        <div class="family reveal">
+          <div class="label">GROOM'S PARENTS</div>
+          <h3>SHYAM TIWARI &<br>SUDHA TIWARI</h3>
+          <p>With love and blessings, they welcome you to share in this beautiful beginning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section final">
+    <div class="container reveal">
+      <div class="ganesh" style="margin-bottom:24px">
+      <img src="ganesha-cover.jpg" alt="Lord Ganesha">
+    </div>
+      <div class="eyebrow">YOUR PRESENCE IS OUR BLESSING</div>
+      <h2>We Await Your Presence</h2>
+      <p>
+        Come celebrate the rituals, the music, the laughter and the sacred beginning
+        of NISHTA & AMAN's journey together.
+      </p>
+      <div class="signature">NISTHA & AMAN</div>
+      <button class="share-btn" id="shareBtn">SHARE INVITATION</button>
+    </div>
+  </section>
+</main>
+
+<div class="controls">
+  <button class="control-btn" id="musicBtn">♫ PLAY MUSIC</button>
+  <button class="control-btn" id="topBtn">↑ TOP</button>
+</div>
+
+<!-- Optional local wedding music.
+     Put a royalty-free MP3 beside index.html and name it wedding-music.mp3.
+     The page falls back to a small built-in ceremonial Indian-style melody if the MP3 is absent. -->
+<audio id="music" loop preload="auto">
+  <source src="wedding-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ---------- OPENING DOORS ---------- */
+const gate = document.getElementById('gate');
+const openBtn = document.getElementById('openBtn');
+
+openBtn.addEventListener('click', () => {
+  gate.classList.add('open');
+  document.body.style.overflow = 'auto';
+  setTimeout(() => gate.classList.add('hide'), 1050);
+});
+
+/* ---------- REVEAL ON SCROLL ---------- */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ---------- COUNTDOWN ---------- */
+const weddingDate = new Date('2026-12-10T00:00:00+05:30').getTime();
+
+function updateCountdown(){
+  let diff = weddingDate - Date.now();
+  if(diff < 0) diff = 0;
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('days').textContent = String(d).padStart(2,'0');
+  document.getElementById('hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+/* ---------- MUSIC ----------
+   If wedding-music.mp3 exists, it is used.
+   If not, a short built-in ceremonial melody is generated after user taps MUSIC.
+*/
+const music = document.getElementById('music');
+const musicBtn = document.getElementById('musicBtn');
+let audioCtx, master, musicTimer, musicOn = false;
+
+function startFallbackMusic(){
+  if(musicOn) return;
+  audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+  master = master || audioCtx.createGain();
+  master.gain.value = 0.045;
+  master.connect(audioCtx.destination);
+
+  // Indian-inspired scale (Sa Re Ga Ma Pa Dha Ni) in a ceremonial rhythm.
+  const scale = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25];
+  let step = 0;
+
+  function beat(){
+    if(!musicOn) return;
+    const now = audioCtx.currentTime;
+    const freq = scale[[0,2,4,5,4,2,0,6,5,4,2,0][step % 12]];
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(freq,now);
+    o.frequency.exponentialRampToValueAtTime(freq*1.012,now+.34);
+    g.gain.setValueAtTime(0.0001,now);
+    g.gain.exponentialRampToValueAtTime(0.12,now+.035);
+    g.gain.exponentialRampToValueAtTime(0.0001,now+.55);
+    o.connect(g); g.connect(master);
+    o.start(now); o.stop(now+.58);
+
+    // Low ceremonial pulse every 4 beats.
+    if(step % 4 === 0){
+      const b = audioCtx.createOscillator();
+      const bg = audioCtx.createGain();
+      b.type='triangle'; b.frequency.value=110;
+      bg.gain.setValueAtTime(.0001,now);
+      bg.gain.exponentialRampToValueAtTime(.05,now+.01);
+      bg.gain.exponentialRampToValueAtTime(.0001,now+.25);
+      b.connect(bg); bg.connect(master); b.start(now); b.stop(now+.27);
+    }
+    step++;
+  }
+  beat();
+  musicTimer = setInterval(beat, 600);
+}
+
+async function toggleMusic(){
+  if(!musicOn){
+    musicOn = true;
+    musicBtn.textContent = '♫ MUSIC ON';
+
+    try{
+      await music.play();
+      // If the local file is missing, play() may reject.
+    }catch(e){
+      startFallbackMusic();
+    }
+  }else{
+    musicOn = false;
+    music.pause();
+    if(audioCtx) audioCtx.suspend();
+    clearInterval(musicTimer);
+    musicBtn.textContent = '♫ PLAY MUSIC';
+  }
+}
+musicBtn.addEventListener('click',toggleMusic);
+
+/* ---------- SHARE ---------- */
+document.getElementById('shareBtn').addEventListener('click',async()=>{
+  const shareData = {
+    title:'Nistha & Aman — Wedding Invitation',
+    text:'You are cordially invited to celebrate the wedding of Nistha & Aman on 10 December 2026 at Parijat Resort, Haidergarh.',
+    url:location.href
+  };
+  try{
+    if(navigator.share) await navigator.share(shareData);
+    else{
+      await navigator.clipboard.writeText(location.href);
+      alert('Invitation link copied!');
+    }
+  }catch(e){}
+});
+
+document.getElementById('topBtn').addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
