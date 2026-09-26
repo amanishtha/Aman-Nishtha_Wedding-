@@ -305,7 +305,233 @@ main{background:var(--cream)}
     radial-gradient(circle at 50% 30%,rgba(242,212,138,.18),transparent 30%),
     linear-gradient(145deg,#3b0a11,#6d1420);
 }
+/* =========================================================
+   WEDDING CARD + SCRATCH REVEAL
+   ========================================================= */
 
+#weddingCard {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at top, rgba(255,215,140,.16), transparent 35%),
+    #3b0710;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .8s ease, visibility .8s ease;
+  overflow-y: auto;
+}
+
+#weddingCard.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wedding-card-inner {
+  position: relative;
+  width: min(430px, 94vw);
+  min-height: 680px;
+  padding: 42px 25px 30px;
+  border: 1px solid rgba(220,180,95,.8);
+  outline: 5px solid rgba(220,180,95,.12);
+  background:
+    linear-gradient(rgba(255,248,230,.97), rgba(250,238,207,.97));
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.45),
+    inset 0 0 0 8px rgba(145,20,35,.08);
+  text-align: center;
+  transform: translateY(40px) scale(.94);
+  transition: transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+#weddingCard.show .wedding-card-inner {
+  transform: translateY(0) scale(1);
+}
+
+.wedding-card-inner::before,
+.wedding-card-inner::after {
+  content: "✦";
+  position: absolute;
+  color: #a97825;
+  font-size: 22px;
+}
+
+.wedding-card-inner::before {
+  top: 13px;
+  left: 17px;
+}
+
+.wedding-card-inner::after {
+  bottom: 13px;
+  right: 17px;
+}
+
+.card-om {
+  font-family: "Noto Serif Devanagari", serif;
+  color: #8d1828;
+  font-size: 25px;
+  margin-bottom: 12px;
+}
+
+.card-small-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #876528;
+  margin-bottom: 16px;
+}
+
+.card-family {
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: #55101a;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+
+.card-family span {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #98743a;
+}
+
+.card-divider {
+  width: 100px;
+  height: 1px;
+  margin: 18px auto;
+  background: #b58a3b;
+}
+
+.card-invitation {
+  font-family: "Noto Serif Devanagari", serif;
+  color: #5a3030;
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 20px auto;
+  max-width: 340px;
+}
+
+.card-couple {
+  font-family: "Cinzel", serif;
+  color: #8d1828;
+  font-size: clamp(27px, 8vw, 38px);
+  letter-spacing: 2px;
+  line-height: 1.25;
+  margin: 14px 0;
+}
+
+.card-and {
+  font-size: 13px;
+  color: #a07832;
+  letter-spacing: 3px;
+  margin: 5px 0;
+}
+
+.scratch-heading {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: #765624;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.scratch-box {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 120px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border: 1px solid #bd9346;
+  background: #fffaf0;
+  touch-action: none;
+  user-select: none;
+}
+
+.scratch-result {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fffaf0;
+  color: #751625;
+}
+
+.scratch-date {
+  font-family: "Cinzel", serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 9px;
+}
+
+.scratch-location {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.7px;
+}
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.scratch-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff5d8;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px #4d320e;
+}
+
+.enter-wedding {
+  border: 1px solid #9d762d;
+  background: #86182a;
+  color: #fff7e5;
+  padding: 13px 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.enter-wedding:hover {
+  background: #64101e;
+  transform: translateY(-2px);
+}
+
+/* gate disappears after opening */
+#gate.hide-gate {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1s ease, visibility 1s ease;
+}
 </style>
 
 <style>
@@ -895,6 +1121,389 @@ document.getElementById('shareBtn').addEventListener('click',async()=>{
 document.getElementById('topBtn').addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:'smooth'});
 });
+  /* =========================================================
+   WEDDING CARD OPENING + SCRATCH REVEAL
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const gate = document.getElementById("gate");
+  const openBtn = document.querySelector(".open-btn");
+  const weddingCard = document.getElementById("weddingCard");
+  const enterWedding = document.getElementById("enterWedding");
+
+  /*
+   * OPEN INVITATION
+   */
+  if (openBtn && gate && weddingCard) {
+
+    openBtn.addEventListener("click", function () {
+
+      // Existing gate opening animation
+      gate.classList.add("open");
+
+      // Wait for the doors to open
+      setTimeout(function () {
+
+        gate.classList.add("hide-gate");
+
+        // Show intermediate wedding card
+        setTimeout(function () {
+          weddingCard.classList.add("show");
+        }, 350);
+
+      }, 1100);
+
+    });
+  }
+
+
+  /*
+   * ENTER WEDDING
+   */
+  if (enterWedding && weddingCard) {
+
+    enterWedding.addEventListener("click", function () {
+
+      weddingCard.classList.remove("show");
+
+      setTimeout(function () {
+
+        // Completely remove overlay
+        weddingCard.style.display = "none";
+
+        // Scroll to the existing main invitation
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }, 750);
+
+    });
+
+  }
+
+
+  /*
+   * SCRATCH CARD
+   */
+
+  const canvas = document.getElementById("scratchCanvas");
+
+  if (!canvas) return;
+
+  const box = canvas.parentElement;
+  const ctx = canvas.getContext("2d");
+
+  let scratching = false;
+  let revealed = false;
+
+  function setupCanvas() {
+
+    const rect = box.getBoundingClientRect();
+
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    /*
+     * Gold scratch surface
+     */
+    const gradient = ctx.createLinearGradient(
+      0,
+      0,
+      rect.width,
+      rect.height
+    );
+
+    gradient.addColorStop(0, "#8f6a27");
+    gradient.addColorStop(.5, "#d6b15c");
+    gradient.addColorStop(1, "#8b6626");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    /*
+     * Decorative pattern
+     */
+    ctx.globalCompositeOperation = "source-over";
+
+    ctx.fillStyle = "rgba(255,255,255,.12)";
+    ctx.font = "20px serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    for (let x = 20; x < rect.width; x += 45) {
+      for (let y = 20; y < rect.height; y += 35) {
+        ctx.fillText("✦", x, y);
+      }
+    }
+
+  }
+
+  setupCanvas();
+
+  window.addEventListener("resize", function () {
+    if (!revealed) {
+      setupCanvas();
+    }
+  });
+
+
+  function getPosition(e) {
+
+    const rect = canvas.getBoundingClientRect();
+
+    let clientX;
+    let clientY;
+
+    if (e.touches && e.touches.length) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else if (e.changedTouches && e.changedTouches.length) {
+      clientX = e.changedTouches[0].clientX;
+      clientY = e.changedTouches[0].clientY;
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+
+  }
+
+
+  function scratch(e) {
+
+    if (!scratching || revealed) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    ctx.globalCompositeOperation = "destination-out";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      pos.x,
+      pos.y,
+      22,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    checkScratch();
+
+  }
+
+
+  function checkScratch() {
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    /*
+     * Check a reduced sample of pixels
+     * so it remains smooth on mobile.
+     */
+
+    const data = ctx.getImageData(
+      0,
+      0,
+      width,
+      height
+    ).data;
+
+    let transparent = 0;
+    let total = 0;
+
+    const step = 12;
+
+    for (let y = 0; y < height; y += step) {
+
+      for (let x = 0; x < width; x += step) {
+
+        const alpha =
+          data[(y * width + x) * 4 + 3];
+
+        total++;
+
+        if (alpha < 80) {
+          transparent++;
+        }
+
+      }
+
+    }
+
+    const percentage =
+      (transparent / total) * 100;
+
+    /*
+     * Reveal automatically after
+     * approximately 45% is scratched.
+     */
+
+    if (percentage >= 45) {
+
+      revealed = true;
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      const hint =
+        box.querySelector(".scratch-hint");
+
+      if (hint) {
+        hint.style.display = "none";
+      }
+
+    }
+
+  }
+
+
+  /*
+   * Mouse
+   */
+
+  canvas.addEventListener("mousedown", function (e) {
+
+    scratching = true;
+    scratch(e);
+
+  });
+
+  canvas.addEventListener("mousemove", scratch);
+
+  window.addEventListener("mouseup", function () {
+
+    scratching = false;
+
+  });
+
+
+  /*
+   * Touch
+   */
+
+  canvas.addEventListener("touchstart", function (e) {
+
+    scratching = true;
+    scratch(e);
+
+  }, { passive: false });
+
+
+  canvas.addEventListener("touchmove", function (e) {
+
+    scratch(e);
+
+  }, { passive: false });
+
+
+  canvas.addEventListener("touchend", function () {
+
+    scratching = false;
+
+  }, { passive: false });
+
+
+});
 </script>
+  <!-- =====================================================
+     INTERMEDIATE WEDDING CARD
+     ===================================================== -->
+
+<section id="weddingCard">
+
+  <div class="wedding-card-inner">
+
+    <div class="card-om">
+      ॥ श्री गणेशाय नमः ॥
+    </div>
+
+    <div class="card-small-title">
+      TOGETHER WITH THEIR FAMILIES
+    </div>
+
+    <div class="card-family">
+      <span>THE BRIDE'S FAMILY</span>
+      [MR.VIMAL PANDEY & MRS.LAXMI PANDEY]
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="card-invitation">
+      With the blessings of our beloved families,
+      we joyfully invite you to celebrate the wedding of
+    </div>
+
+    <div class="card-couple">
+      NISTHA
+      <div class="card-and">&</div>
+      AMAN
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="card-family">
+      <span>THE GROOM'S FAMILY</span>
+      [MR.SHYAM TIWARI & MRS.SUDHA TIWARI]
+    </div>
+
+    <div class="card-invitation">
+      Your presence, love and blessings will make
+      our celebration truly special.
+    </div>
+
+    <div class="scratch-heading">
+      SCRATCH TO REVEAL THE WEDDING DETAILS
+    </div>
+
+    <div class="scratch-box">
+
+      <div class="scratch-result">
+        <div class="scratch-date">
+          10 DECEMBER 2026
+        </div>
+
+        <div class="scratch-location">
+          PARIJAT RESORT · HAIDERGARH
+        </div>
+      </div>
+
+      <canvas id="scratchCanvas"></canvas>
+
+      <div class="scratch-hint">
+        SCRATCH HERE ✦
+      </div>
+
+    </div>
+
+    <button class="enter-wedding" id="enterWedding">
+      ENTER WEDDING
+    </button>
+
+  </div>
+
+</section>
 </body>
 </html>
