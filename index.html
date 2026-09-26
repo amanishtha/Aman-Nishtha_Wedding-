@@ -532,6 +532,57 @@ main{background:var(--cream)}
   pointer-events: none;
   transition: opacity 1s ease, visibility 1s ease;
 }
+  /* ===== RESPONSIVE VENUE PHOTO ===== */
+
+.venue-photo {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  background: #3b0710;
+  border: 1px solid rgba(190,145,65,.65);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.venue-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Laptop / desktop */
+@media (min-width: 768px) {
+  .venue-photo {
+    max-width: 850px;
+  }
+
+  .venue-photo img {
+    max-height: 520px;
+    object-fit: contain;
+  }
+}
+
+/* Phone */
+@media (max-width: 767px) {
+  .venue-photo {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .venue-photo img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+}
 </style>
 
 <style>
